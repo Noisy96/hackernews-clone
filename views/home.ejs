@@ -1,0 +1,195 @@
+<html>
+
+<head>
+    <title>Hacker News</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        @media only screen and (min-width: 800px) {
+            body {
+                width: 80%;
+                margin: auto;
+            }
+        }
+
+        #logo {
+            height: inherit;
+        }
+
+        #header {
+            height: 25px;
+            margin-top: 10px;
+            background-color: FF6600;
+            font-family: monospace;
+        }
+
+        #header a {
+            position: relative;
+            bottom: 7px;
+            font-size: 1.1em;
+        }
+
+        #header p {
+            display: inline;
+            position: relative;
+            bottom: 7px;
+        }
+
+        #title {
+            padding-right: 20px;
+            padding-left: 20px;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        #main-div {
+            background-color: F6F6EF;
+            padding-top: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .article-div {
+            display: flex;
+            margin: -15px 0px;
+        }
+
+        .article-div p {
+            padding: 0px 3px;
+        }
+
+        .article-title {
+            font-size: 0.8em;
+            margin-bottom: -5px;
+        }
+
+        .article-details {
+            font-size: 0.6em;
+            color: grey;
+        }
+
+        .article-details a {
+            color: gray;
+        }
+
+        .article-details a:hover {
+            text-decoration: underline;
+        }
+
+        .rankbox {
+            color: lightslategray;
+            font-size: 0.75em;
+        }
+
+        .rankbox a {
+            color: lightslategray;
+        }
+
+        .more-dive p {
+            font-size: 0.8em;
+            padding: 10px 35px;
+            margin-bottom: 0px;
+        }
+
+        .more-dive a {
+            color: gray;
+        }
+
+        .horizontal-divider {
+            background-color: FF6600;
+            width: 100%;
+            height: 2px;
+        }
+
+        footer {
+            background-color: F6F6EF;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 0.8em;
+            text-align: center;
+        }
+
+        footer p {
+            display: inline-block;
+        }
+
+        .footer-links {
+            font-size: 0.75em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header">
+        <img src="logo.png" id="logo">
+        <p id="title">Hacker News</p>
+        <a href="#" class="header-link">new</a>
+        <p>|</p>
+        <a href="#" class="header-link">past</a>
+        <p>|</p>
+        <a href="#" class="header-link">comments</a>
+        <p>|</p>
+        <a href="#" class="header-link">ask</a>
+        <p>|</p>
+        <a href="#" class="header-link">show</a>
+        <p>|</p>
+        <a href="#" class="header-link">jobs</a>
+        <p>|</p>
+        <a href="#">submit</a>
+    </div>
+
+    <div id="main-div">
+        <% let rankingIndex = 1; %>
+        <% stories.forEach(function(story) { %>
+        <div class="article-div">
+            <div class="rankbox">
+                <p><%= rankingIndex++; %>. <a href="#" title="upvote">▲</a></p>
+            </div>
+            <div>
+                <p class="article-title"><a href="//<%= story.url %>"> <%= story.title %></a></p>
+                <p class="article-details"><%= story.score %> points by <a href="#"><%= story.by %></a> 1 hour ago <!-- TODO : fill with dynamic value -->| <a
+                        href="#">hide</a> | <a href="#"><%= story.kids.length %> comments</a></p>
+            </div>
+        </div>
+        <% }); %>
+
+        <div class="more-dive">
+            <p><a href="#">More</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="horizontal-divider"></div>
+        <p>Applications are open for YC Summer 2020</p>
+        <div class="footer-links">
+            <a href="#">Guidelines</a>
+            <p>|</p>
+            <a href="#">FAQ</a>
+            <p>|</p>
+            <a href="#">Support</a>
+            <p>|</p>
+            <a href="#">API</a>
+            <p>|</p>
+            <a href="#">Security</a>
+            <p>|</p>
+            <a href="#">Lists</a>
+            <p>|</p>
+            <a href="#">Bookmarklet</a>
+            <p>|</p>
+            <a href="#">Legal</a>
+            <p>|</p>
+            <a href="#">Apply to YC</a>
+            <p>|</p>
+            <a href="#">Contact</a>
+        </div>
+        <p class="searchbox">
+            <label for="search">Search: </label>
+            <input type="text" id="search" name="search" />
+        </p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "hackernews_clone",
+  "version": "1.0.0",
+  "description": "An experimental project to apply some of what was learned about node",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server"
+  },
+  "author": "Rahmouni Abdelhak",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.7",
+    "serve-favicon": "^2.5.0"
+  }
+}
