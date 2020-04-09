@@ -1,0 +1,146 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: rgb(232, 233, 233);
+        }
+
+        #main-box {
+            margin: 100px auto;
+            width: 700px;
+            height: 400px;
+            background-color: white;
+            -webkit-box-shadow: -8px 0px 32px -8px rgba(0, 0, 0, 0.31);
+            -moz-box-shadow: -8px 0px 32px -8px rgba(0, 0, 0, 0.31);
+            box-shadow: -8px 0px 32px -8px rgba(0, 0, 0, 0.31);
+            border-radius: 25px;
+            display: flex;
+        }
+
+        .sec-box {
+            min-width: 350px;
+            height: 100%;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        #left-box {
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+        }
+
+        #right-box {
+            background-color: FF6600;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .sec-box h1 {
+            font-size: 2em;
+            margin: 50px;
+            margin-bottom: 80px;
+        }
+
+        #left-box h1 {
+            color: FF6600;
+        }
+
+        #right-box h1 {
+            color: white;
+        }
+
+        .sec-box input {
+            margin: 10px auto;
+            width: 80%;
+            height: 40px;
+            border-radius: 20px;
+            display: block;
+            padding-left: 20px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            transition: box-shadow 0.3s;
+            font-weight: bold;
+        }
+
+        .sec-box input:hover,
+        input:focus {
+            box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.3);
+            outline: none;
+        }
+
+        #left-box input {
+            border: 2px solid rgb(255, 102, 0);
+        }
+
+        #left-box ::placeholder {
+            color: FF6600;
+            opacity: 60%;
+            font-weight: 100;
+        }
+
+        #right-box input {
+            background-color: rgb(255, 102, 0);
+            color: white;
+            border: 2px solid white;
+        }
+
+        #right-box ::placeholder {
+            color: white;
+            opacity: 60%;
+            font-weight: 100;
+        }
+
+        .sec-box button {
+            width: 80%;
+            height: 40px;
+            margin: 30px 10%;
+            border-radius: 20px;
+            border: transparent;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 1em;
+            font-weight: bold;
+            transition: box-shadow 0.3s;
+        }
+
+        .sec-box button:hover {
+            box-shadow: 0px 10px 10px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        #left-box button {
+            background-color: FF6600;
+            color: white;
+        }
+
+        #right-box button {
+            color: FF6600;
+        }
+
+        /* TODO : Add responsivity */
+    </style>
+</head>
+
+<body>
+    <div id="main-box">
+        <div class="sec-box" id="left-box">
+            <h1>Login </h1>
+            <form method="POST" action="submit/login">
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" />
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <div class="sec-box" id="right-box">
+            <h1>Sign up</h1>
+            <form method="POST" action="submit/signup">
+                <input type="text" placeholder="Username" name="username" />
+                <input type="password" placeholder="Password" name="password" />
+                <button>Create Account</button>
+            </form>
+        </div>
+    </div>
+    <p style="text-align: center;">Although I promised myself not to be bothered by the front end on this little project
+        and focus exclusively on the backend :')</p>
+</body>
+
+</html>

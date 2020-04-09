@@ -12,6 +12,7 @@ try {
 }
 
 // Database connection
+/*
 mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Successfully connected to database');
@@ -19,6 +20,14 @@ mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true
     .catch((error) => {
         console.log('Failed to connect to database');
     });
+
+*/
+
+// Used to parse JSON bodies
+app.use(express.json());
+
+// Used to parse data sent in form using POST
+app.use(express.urlencoded({ extended: true }));
 
 // Because static files in Express must be in directory specified to be static
 app.use(express.static('images'));
@@ -58,6 +67,15 @@ app.get('/', function (req, res) {
     res.render('home.ejs', {
         stories: stories
     });
+});
+
+app.get('/submit', function(req, res) {
+    res.render('auth.ejs');
+});
+
+app.post('/submit/login', function(req, res) {
+    console.log(req.body);
+    res.redirect('/submit');
 });
 
 module.exports = app;
