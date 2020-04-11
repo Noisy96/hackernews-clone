@@ -116,7 +116,21 @@
             color: FF6600;
         }
 
-        /* TODO : Add responsivity */
+        .username-status {
+            margin: -6px 0px -2px 50px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        #login-username-status {
+            color: red;
+        }
+
+        #signup-username-status {
+            color: yellow;
+        }
+
+        /* TODO : Add more responsivity */
     </style>
 </head>
 
@@ -124,17 +138,29 @@
     <div id="main-box">
         <div class="sec-box" id="left-box">
             <h1>Login </h1>
-            <form method="POST" action="submit/login">
-                <input type="text" placeholder="Username" name="username" />
-                <input type="password" placeholder="Password" name="password" />
+            <form method="POST" action="/submit/login">
+                <input type="text" placeholder="Username" name="username" pattern="\w{5,12}"
+                title="Choose a username using only alphanumerical characters and between 5 to 12 characters"
+                required />
+                <% if (status == 1) { %>
+                <p id="login-username-status" class="username-status">&#9888; username is not regsitered</p>
+                <% } %>
+                <input type="password" placeholder="Password" name="password" pattern=".{6,}"
+                title="Password must be longer than 6 characters" required />
                 <button type="submit">Login</button>
             </form>
         </div>
         <div class="sec-box" id="right-box">
             <h1>Sign up</h1>
-            <form method="POST" action="submit/signup">
-                <input type="text" placeholder="Username" name="username" />
-                <input type="password" placeholder="Password" name="password" />
+            <form method="POST" action="/submit/signup">
+                <input type="text" placeholder="Username" name="username" pattern="\w{5,12}"
+                title="Choose a username using only alphanumerical characters and between 5 to 12 characters"
+                required />
+                <% if (status == 2) { %>
+                <p id="signup-username-status" class="username-status">&#9888; username is not available</p>
+                <% } %>
+                <input type="password" placeholder="Password" name="password" pattern=".{6,}"
+                title="Password must be longer than 6 characters" required />
                 <button>Create Account</button>
             </form>
         </div>

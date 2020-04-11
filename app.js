@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
 
+const submitRouter = require('./routes/submit');
+
 const app = express();
 
 // File the file containing the database credentials
@@ -12,7 +14,6 @@ try {
 }
 
 // Database connection
-/*
 mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('Successfully connected to database');
@@ -20,8 +21,6 @@ mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true
     .catch((error) => {
         console.log('Failed to connect to database');
     });
-
-*/
 
 // Used to parse JSON bodies
 app.use(express.json());
@@ -69,13 +68,6 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/submit', function(req, res) {
-    res.render('auth.ejs');
-});
-
-app.post('/submit/login', function(req, res) {
-    console.log(req.body);
-    res.redirect('/submit');
-});
+app.use('/submit', submitRouter);
 
 module.exports = app;
