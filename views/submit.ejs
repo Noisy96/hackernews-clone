@@ -1,0 +1,99 @@
+<html>
+
+<head>
+    <style>
+        #header {
+            height: 25px;
+            margin-top: 10px;
+            background-color: FF6600;
+            font-family: monospace;
+        }
+
+        @media only screen and (min-width: 800px) {
+            body {
+                width: 80%;
+                margin: auto;
+            }
+        }
+
+        #logo {
+            height: inherit;
+        }
+
+        #title {
+            padding-right: 20px;
+            padding-left: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: inline;
+            position: relative;
+            bottom: 6px;
+        }
+
+        #main-div {
+            background-color: F6F6EF;
+            padding-top: 1px;
+            padding-bottom: 30px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            color: gray;
+            font-size: 0.8em;
+        }
+
+        #main-div label {
+            margin-right: 10px;
+        }
+
+        #main-div p {
+            margin-left: 5px;
+        }
+
+        #main-div p input,
+        p textarea {
+            width: 300px;
+            vertical-align: middle;
+        }
+
+        #main-div p textarea {
+            height: 60px;
+        }
+
+        #main-div form button {
+            margin-left: 40px;
+        }
+
+        p.info-paragraph {
+            margin-left: 40px !important;
+        }
+
+        #or-paragraph {
+            font-weight: bold;
+        }
+
+        #url-p input {
+            margin-left: 8px;
+        }
+    </style>
+    <title>Submit | Hacker News</title>
+</head>
+
+<body>
+    <div id="header">
+        <img src="images/logo.png" id="logo">
+        <p id="title">Submit</p>
+    </div>
+    <div id="main-div">
+        <form>
+            <p><label>title</label><input type="text" name="title"/></p>
+            <p id="url-p"><label>url</label><input type="text" name="url"/></p>
+            <p class="info-paragraph" id="or-paragraph">Or</p>
+            <p><label>text</label><textarea name="text"></textarea></p>
+            <button>submit</button>
+        </form>
+        <p class="info-paragraph">Leave url blank to submit a question for discussion. If there is no url, the text (if
+            any) will appear at
+            the top of the thread.
+        </p>
+    </div>
+</body>
+
+</html>

@@ -1,7 +1,8 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-exports.createUser = (req, res, next) => {
+exports.signUp = (req, res, next) => {
 
     // TODO : add validation and sanitization
 
@@ -24,6 +25,30 @@ exports.createUser = (req, res, next) => {
     }).catch((error) => {
         console.log('A problem occured when hashing the password');
     });
-    
+
     res.redirect('/');
+};
+
+exports.login = (req, res, next) => {
+    User.findOne({ username: req.body.username }).then((user) => {
+        if (!user) {
+            const status = encodeURIComponent('1');
+            res.redirect('/submit/?status=' + status);
+        }
+        else {
+            bcrypt.compare(req.body.password, user.password).then((valid) => {
+                if (!valid) {
+                    const status = encodeURIComponent('3');
+                    res.redirect('/submit/?status=' + status);
+                }
+                else {
+                    res.end('This should log you in!')
+                }
+            }).catch((error) => {
+                console.log('an error occured while comparing the password hashes');
+            });
+        }
+    }).catch((error) => {
+        console.log('an error occuried while querying user data');
+    });
 }

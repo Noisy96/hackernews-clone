@@ -29,10 +29,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Because static files in Express must be in directory specified to be static
-app.use(express.static('images'));
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
 
+    // TODO : delete this and replace it with dynamic data
     const stories = [
         {
             by: "Abdelhak",
