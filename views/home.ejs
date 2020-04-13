@@ -145,7 +145,13 @@
         <a href="#">jobs</a>
         <p>|</p>
         <a href="/submit">submit</a>
+        <% if(username) { %>
+        <a href="/authenticate" id="login-header-link"">(<%= username %>)</a>
+        <a href="/logout" id="login-header-link"">Logout</a>
+        <% } %>
+        <% if(!username) { %>
         <a href="/authenticate" id="login-header-link"">login</a>
+        <% } %>
     </div>
 
     <div id="main-div">

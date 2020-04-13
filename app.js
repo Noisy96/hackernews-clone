@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
+const cookieParser = require('cookie-parser');
+const jwt = require('jsonwebtoken');
 
 const authRouter = require('./routes/authenticate');
 
@@ -28,17 +30,27 @@ app.use(express.json());
 // Used to parse data sent in form using POST
 app.use(express.urlencoded({ extended: true }));
 
+// For parsing cookies obviously
+app.use(cookieParser());
+
 // Because static files in Express must be in directory specified to be static
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
+
+    const token = req.cookies.token;
+    var username;
+    if(token) {
+        const payload = jwt.verify(token, 'SECRET_HACKERNEWS_TOKEN')
+        username = payload.username;
+    }
 
     // TODO : delete this and replace it with dynamic data
     const stories = [
         {
             by: "Abdelhak",
             descendants: 1,
-            kids: [1,2,6,8,3,2],
+            kids: [1, 2, 6, 8, 3, 2],
             score: 128,
             time: new Date().getTime(),
             title: "Peers expectations and human behavior - Medium",
@@ -47,7 +59,7 @@ app.get('/', function (req, res) {
         {
             by: "Mounir",
             descendants: 12,
-            kids: [1,2,3,4],
+            kids: [1, 2, 3, 4],
             score: 12,
             time: new Date().getTime(),
             title: "12 Best tricks for taking your mobile photography skills to the next level - BoredPanda",
@@ -65,8 +77,14 @@ app.get('/', function (req, res) {
     ];
 
     res.render('home.ejs', {
+        username: username,
         stories: stories
     });
+});
+
+app.get('/logout', function(req, res) {
+    res.cookie('token','');
+    res.redirect('/');
 });
 
 app.use('/authenticate', authRouter);

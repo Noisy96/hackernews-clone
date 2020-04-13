@@ -42,7 +42,13 @@ exports.login = (req, res, next) => {
                     res.redirect('/authenticate/?status=' + status);
                 }
                 else {
-                    res.end('This should log you in!')
+                    const token = jwt.sign(
+                        { userId: user._id, username: user.username },
+                        'SECRET_HACKERNEWS_TOKEN',
+                        { expiresIn: '12h' }
+                    );
+                    res.cookie('token', token);
+                    res.redirect('/');
                 }
             }).catch((error) => {
                 console.log('an error occured while comparing the password hashes');
