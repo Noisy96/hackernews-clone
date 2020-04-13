@@ -155,6 +155,7 @@
     </div>
 
     <div id="main-div">
+        <% if(stories) { %>
         <% let rankingIndex = 1; %>
         <% stories.forEach(function(story) { %>
         <div class="article-div">
@@ -167,7 +168,7 @@
                         href="#">hide</a> | <a href="#"><%= story.kids.length %> comments</a></p>
             </div>
         </div>
-        <% }); %>
+        <% })}; %>
 
         <div class="more-dive">
             <p><a href="#">More</a></p>

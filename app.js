@@ -5,7 +5,10 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 const authRouter = require('./routes/authenticate');
+const submitRouter = require('./routes/submit');
 const auth = require('./middlewares/auth');
+
+const Story = require('./models/story');
 
 const app = express();
 
@@ -38,52 +41,22 @@ app.use(cookieParser());
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-
-    try {
-        const token = req.cookies.token;
-        var username;
-        if(token) {
-            const payload = jwt.verify(token, '1a216fadb3d56b74b11cea881a1b2ac7')
-            username = payload.username;
+    
+    Story.find().then((stories) => {
+        try {
+            const token = req.cookies.token;
+            var username;
+            if(token) {
+                const payload = jwt.verify(token, '1a216fadb3d56b74b11cea881a1b2ac7')
+                username = payload.username;
+            }
+        } catch (error) {
+            console.log(error);
         }
-    } catch (error) {
-        console.log(error);
-    }
-
-    // TODO : delete this and replace it with dynamic data
-    const stories = [
-        {
-            by: "Abdelhak",
-            descendants: 1,
-            kids: [1, 2, 6, 8, 3, 2],
-            score: 128,
-            time: new Date().getTime(),
-            title: "Peers expectations and human behavior - Medium",
-            url: "www.facebook.com/noisy96"
-        },
-        {
-            by: "Mounir",
-            descendants: 12,
-            kids: [1, 2, 3, 4],
-            score: 12,
-            time: new Date().getTime(),
-            title: "12 Best tricks for taking your mobile photography skills to the next level - BoredPanda",
-            url: "www.instagram.com/phone_graphic"
-        },
-        {
-            by: "Salah",
-            descendants: 1,
-            kids: [],
-            score: 13,
-            time: new Date().getTime(),
-            title: "A comprehensive guide for winning with the ladies - Medium",
-            url: "www.facebook.com/halas"
-        },
-    ];
-
-    res.render('home.ejs', {
-        username: username,
-        stories: stories
+        res.render('home.ejs', {
+            username: username,
+            stories: stories
+        });
     });
 });
 
@@ -92,9 +65,7 @@ app.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-app.get('/submit', auth, function(req, res, next) {
-    res.render('submit.ejs');
-});
+app.use('/submit', submitRouter);
 
 app.use('/authenticate', authRouter);
 
