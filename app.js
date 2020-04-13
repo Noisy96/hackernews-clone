@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 const authRouter = require('./routes/authenticate');
+const auth = require('./middlewares/auth');
 
 const app = express();
 
@@ -16,7 +17,7 @@ try {
 }
 
 // Database connection
-mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
         console.log('Successfully connected to database');
     })
@@ -38,11 +39,15 @@ app.use(express.static('public'));
 
 app.get('/', function (req, res) {
 
-    const token = req.cookies.token;
-    var username;
-    if(token) {
-        const payload = jwt.verify(token, 'SECRET_HACKERNEWS_TOKEN')
-        username = payload.username;
+    try {
+        const token = req.cookies.token;
+        var username;
+        if(token) {
+            const payload = jwt.verify(token, '1a216fadb3d56b74b11cea881a1b2ac7')
+            username = payload.username;
+        }
+    } catch (error) {
+        console.log(error);
     }
 
     // TODO : delete this and replace it with dynamic data
@@ -85,6 +90,10 @@ app.get('/', function (req, res) {
 app.get('/logout', function(req, res) {
     res.cookie('token','');
     res.redirect('/');
+});
+
+app.get('/submit', auth, function(req, res, next) {
+    res.render('submit.ejs');
 });
 
 app.use('/authenticate', authRouter);

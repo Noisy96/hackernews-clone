@@ -44,7 +44,7 @@ exports.login = (req, res, next) => {
                 else {
                     const token = jwt.sign(
                         { userId: user._id, username: user.username },
-                        'SECRET_HACKERNEWS_TOKEN',
+                        '1a216fadb3d56b74b11cea881a1b2ac7',
                         { expiresIn: '12h' }
                     );
                     res.cookie('token', token);
