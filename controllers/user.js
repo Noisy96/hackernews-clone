@@ -33,13 +33,13 @@ exports.login = (req, res, next) => {
     User.findOne({ username: req.body.username }).then((user) => {
         if (!user) {
             const status = encodeURIComponent('1');
-            res.redirect('/submit/?status=' + status);
+            res.redirect('/authenticate/?status=' + status);
         }
         else {
             bcrypt.compare(req.body.password, user.password).then((valid) => {
                 if (!valid) {
                     const status = encodeURIComponent('3');
-                    res.redirect('/submit/?status=' + status);
+                    res.redirect('/authenticate/?status=' + status);
                 }
                 else {
                     res.end('This should log you in!')

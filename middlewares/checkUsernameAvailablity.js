@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
         }
         else {
             const status = encodeURIComponent('2');
-            res.redirect('/submit/?status='+status);
+            res.redirect('/authenticate/?status='+status);
         }
     });
 }

@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
 
-const submitRouter = require('./routes/submit');
+const authRouter = require('./routes/authenticate');
 
 const app = express();
 
@@ -69,6 +69,6 @@ app.get('/', function (req, res) {
     });
 });
 
-app.use('/submit', submitRouter);
+app.use('/authenticate', authRouter);
 
 module.exports = app;
