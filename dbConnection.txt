@@ -1,1 +1,0 @@
-mongodb+srv://hackerNewsAdmin:passhackernewsword@hackernewscluster-sgqyq.mongodb.net/test?retryWrites=true&w=majority
