@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { jwtToken } = require('../config');
 
 exports.signUp = (req, res, next) => {
 
@@ -44,7 +45,7 @@ exports.login = (req, res, next) => {
                 else {
                     const token = jwt.sign(
                         { userId: user._id, username: user.username },
-                        '1a216fadb3d56b74b11cea881a1b2ac7',
+                        jwtToken,
                         { expiresIn: '12h' }
                     );
                     res.cookie('token', token);

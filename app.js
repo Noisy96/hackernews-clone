@@ -1,26 +1,25 @@
+// packages & modules
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const { databaseToken, jwtToken } = require('./config');
 
+// routes
 const authRouter = require('./routes/authenticate');
 const submitRouter = require('./routes/submit');
+
+// middlewares
 const auth = require('./middlewares/auth');
 
+// models
 const Story = require('./models/story');
 
 const app = express();
 
-// File the file containing the database credentials
-try {
-    var dbConnection = fs.readFileSync('dbConnection.txt', 'utf8');
-} catch (error) {
-    console.log('Failed to read the database credentials file');
-}
-
 // Database connection
-mongoose.connect(dbConnection, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(databaseToken, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
         console.log('Successfully connected to database');
     })
@@ -42,12 +41,13 @@ app.use(express.static('public'));
 
 app.get('/', function (req, res) {
     
+    // TODO : this will be moved to the controllers
     Story.find().then((stories) => {
         try {
             const token = req.cookies.token;
             var username;
             if(token) {
-                const payload = jwt.verify(token, '1a216fadb3d56b74b11cea881a1b2ac7')
+                const payload = jwt.verify(token, jwtToken);
                 username = payload.username;
             }
         } catch (error) {

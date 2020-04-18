@@ -1,11 +1,11 @@
 const Story = require('../models/story');
 const jwt = require('jsonwebtoken');
+const { jwtToken } = require('../config');
 
-// TODO : make this dynamic instead of hardcoding data in
 exports.createStory = (req, res) => {
     
     const token = req.cookies.token;
-    const username = jwt.verify(token,'1a216fadb3d56b74b11cea881a1b2ac7').username;
+    const username = jwt.verify(token, jwtToken).username;
 
     const story = new Story({
         by: username,
